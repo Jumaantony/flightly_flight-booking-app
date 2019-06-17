@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Installed Applications
+    'rest_framework',
+    # Local Applications
+    'flightly.flight_booking',
 ]
 
 MIDDLEWARE = [
