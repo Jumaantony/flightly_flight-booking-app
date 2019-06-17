@@ -19,7 +19,7 @@ class FlightlyUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2'),
+            'fields': ('email', 'first_name', 'last_name','password1', 'password2'),
         }),
     )
     ordering = ('first_name',)
