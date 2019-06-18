@@ -24,6 +24,26 @@ pip install -r requirements.txt
 
 Then setup appropriate environment variables as prescribed in the `.env.sample` file and save them in a `.env` in the root directory
 
+## Database Initialization
+
+N/B: You have to create a postgresql database and added it to the `.env` file or runtime envirionment using 
+
+```bash
+export DATABASE_URI="postgres:///<database-name>"
+```
+
+Then run the command bellow if you want to create tables and populate them with dummy data.
+
+```bash
+make initdb
+```
+
+or this one if you only want to create tables in your database.
+
+```bash
+make migrate
+```
+
 ## Running Local server
 
 To run the local server use:
@@ -37,6 +57,16 @@ or
 ```bash
 python manage.py runserver
 ```
+
+## Creating SuperUser and Using the Admin Dashboard
+
+To create a superuser use the below command and fill in the relevant prompts:
+
+```bash
+python manage.py createsuperuser
+```
+
+To access the Admin Dashboard navigate to `/admin` url on the server ran above and login with the superuser credentials used in the above command
 
 ## License
 
