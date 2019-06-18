@@ -85,4 +85,4 @@ class Reservation(models.Model):
         return self.flight.departure_datetime
 
     def __str__(self):
-        return f"Reservation for Flight {self.flight} made by {self.traveler}."
+        return f"Reservation for Flight {self.flight} made by {self.traveler.username}."
