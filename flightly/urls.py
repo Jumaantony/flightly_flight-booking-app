@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 admin.site.site_header = "Flightly Admin"
 admin.site.site_title = "Flightly Admin Portal"
@@ -22,4 +22,6 @@ admin.site.index_title = "Welcome to Flightly Admin Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('flightly.users.urls')),
+    path('', include('flightly.flight_booking.urls')),
 ]
