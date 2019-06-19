@@ -12,8 +12,7 @@ class FlightAdmin(admin.ModelAdmin):
         'available_seats',
         'departure_airport',
         'departure_datetime')
-    list_editable = ('capacity','price','departure_datetime')
-
+    list_editable = ('capacity', 'price', 'departure_datetime')
 
 
 @admin.register(Reservation)

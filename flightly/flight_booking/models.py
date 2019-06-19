@@ -32,7 +32,11 @@ class Flight(models.Model):
         _("Arrival Airport"), max_length=50, null=False)
     departure_datetime = models.DateTimeField(_("Departure Time"))
     capacity = models.IntegerField(_("Carrying Capacity"), null=False)
-    price = models.DecimalField(_("Ticket Price"),decimal_places=2,max_digits=10, default=0)
+    price = models.DecimalField(
+        _("Ticket Price"),
+        decimal_places=2,
+        max_digits=10,
+        default=0)
 
     @property
     def available_seats(self):
