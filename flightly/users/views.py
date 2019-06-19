@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from rest_framework import generics
 
-# Create your views here.
+from flightly.users.models import FlightlyUser
+from flightly.users.serializers import FlightlyUserSerializer
+
+
+class FlightlyUserApiView(generics.ListCreateAPIView):
+    queryset = FlightlyUser.objects.all()
+    serializer_class = FlightlyUserSerializer
+
+
+class FlightlyUserDetailApiView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = FlightlyUser.objects.all()
+    serializer_class = FlightlyUserSerializer
