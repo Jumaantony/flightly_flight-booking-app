@@ -48,9 +48,8 @@ print(f"FlightlyUsers populates Successfully.")
 
 from django.db import IntegrityError
 air_lines = airlines.get_reports(test=False)
-dep_airline_in_cycle = itertools.cycle(air_lines)
-random.shuffle(air_lines)
-arv_airline_in_cycle = itertools.cycle(air_lines)
+dep_airline_in_cycle = itertools.cycle(air_lines[:len(air_lines)//2])
+arv_airline_in_cycle = itertools.cycle(air_lines[len(air_lines)//2:])
 timezone = pytz.utc
 for _ in range(4):
     try:
