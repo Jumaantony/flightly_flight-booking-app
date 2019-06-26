@@ -6,17 +6,19 @@
 from django.db import IntegrityError
 import pytz
 import random
-import airlines
 from faker import Faker
 import itertools
-from flightly.flight_booking.models import Flight, Reservation
-from flightly.users.models import FlightlyUser
 import django
 import os
 import sys
+from tqdm import tqdm
 sys.path.insert(0, '.')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "flightly.settings")
 django.setup()
+
+from flightly.flight_booking.models import Flight, Reservation
+from flightly.users.models import FlightlyUser
+import airlines
 
 
 # In[76]:
@@ -31,14 +33,17 @@ fake = Faker()
 # In[78]:
 
 
-for _ in range(50):
-    fname = fake.first_name()
-    lname = fake.last_name()
-    email = fake.email()
-    password = fake.password()
-    user = FlightlyUser(email=email, first_name=fname, last_name=lname)
-    user.set_password(password)
-    user.save()
+for _ in tqdm(range(500)):
+    try:
+        fname = fake.first_name()
+        lname = fake.last_name()
+        email = fake.email()
+        password = fake.password()
+        user = FlightlyUser(email=email, first_name=fname, last_name=lname)
+        user.set_password(password)
+        user.save()
+    except IntegrityError:
+        continue
 
 print(f"FlightlyUsers populates Successfully.")
 
@@ -46,10 +51,11 @@ print(f"FlightlyUsers populates Successfully.")
 
 
 air_lines = airlines.get_reports(test=False)
-dep_airline_in_cycle = itertools.cycle(air_lines[:len(air_lines) // 2])
-arv_airline_in_cycle = itertools.cycle(air_lines[len(air_lines) // 2:])
+dep_airline_in_cycle = itertools.cycle(air_lines[:len(air_lines)//2])
+random.shuffle(air_lines)
+arv_airline_in_cycle = itertools.cycle(air_lines[len(air_lines)//2:])
 timezone = pytz.utc
-for _ in range(4):
+for _ in tqdm(range(40)):
     try:
         dep_air_line = next(dep_airline_in_cycle)
         arv_air_line = next(arv_airline_in_cycle)
@@ -69,7 +75,8 @@ for _ in range(4):
             capacity=capacity,
             price=price
         )
-        _flight.save()
+        if _flight.departure_airport != _flight.arrival_airport:
+            _flight.save()
     except IntegrityError:
         # A cheap way to escape IntegrityErrors due to similar names of Flights
         continue
@@ -82,8 +89,8 @@ print(f"Flights populates Successfully.")
 travelers = itertools.cycle(FlightlyUser.objects.all())
 flights = itertools.cycle(Flight.objects.all())
 status_options = ['paid', 'unpaid', 'cancelled']
-for _ in range(int(FlightlyUser.objects.all().count()
-                   * Flight.objects.all().count() / 3.14)):
+for _ in tqdm(range(int(FlightlyUser.objects.all().count()
+                   * Flight.objects.all().count() / 3.14))):
     traveler = next(travelers)
     flight = next(flights)
     status = random.choice(status_options)
