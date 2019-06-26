@@ -32,4 +32,4 @@ class ReservationSerializer(serializers.HyperlinkedModelSerializer):
             'ticket_number',
             'status',
         )
-        read_only_fields = ('traveler', 'ticket_number', 'status',)
+        read_only_fields = ('ticket_number', 'status',)
