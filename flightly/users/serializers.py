@@ -23,9 +23,3 @@ class FlightlyUserSerializer(serializers.HyperlinkedModelSerializer):
             }
         }
         read_only_fields = ('last_login',)
-
-    def create(self, validated_data):
-        user = FlightlyUser.objects.create_user(
-            **validated_data,
-            )
-        return user
