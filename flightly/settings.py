@@ -104,6 +104,18 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    {
+        'NAME': 'flightly.users.validators.password_validators.ContainsNumberValidator',
+    },
+    {
+        'NAME': 'flightly.users.validators.password_validators.ContainsUppercaseValidator',
+    },
+    {
+        'NAME': 'flightly.users.validators.password_validators.ContainsLowercaseValidator',
+    },
+    {
+        'NAME': 'flightly.users.validators.password_validators.ContainsSymbolValidator',
+    },
 ]
 
 

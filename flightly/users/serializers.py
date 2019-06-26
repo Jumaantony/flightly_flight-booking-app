@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from django.contrib.auth import password_validation
+
 
 from django.contrib.auth import get_user_model
 FlightlyUser = get_user_model()
@@ -23,3 +25,7 @@ class FlightlyUserSerializer(serializers.HyperlinkedModelSerializer):
             }
         }
         read_only_fields = ('last_login',)
+
+    def validate_password(self, value):
+        password_validation.validate_password(value, self.instance)
+        return value
