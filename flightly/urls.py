@@ -24,4 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('flightly.users.urls')),
     path('', include('flightly.flight_booking.urls')),
+    path('', include('flightly.docs.urls')),
 ]

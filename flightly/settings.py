@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     # Local Applications
     'flightly.flight_booking',
-    'flightly.users'
+    'flightly.users',
+    'flightly.docs',
 ]
 
 MIDDLEWARE = [
