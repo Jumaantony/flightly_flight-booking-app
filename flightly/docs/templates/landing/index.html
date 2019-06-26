@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flightly | Welcome</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <style>
+        .hero.has-background {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            object-fit: cover;
+            object-position: center center;
+        }
+
+        .hero-background.is-transparent {
+            opacity: 0.66;
+        }
+
+        .black-bg {
+            background-color: black;
+            opacity: 0.66;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero is-info is-fullheight">
+        <img alt="Flight Booking API" class="hero-background is-transparent" src="{% static 'booking.svg' %}" />
+        <div class="hero-body  has-background">
+            <div class="container">
+                <div class="columns">
+                    <div class="column has-text-centered">
+                        <h1 class="title black-bg is-size-2 is-size-4-mobile is-italic is-family-monospace is-capitalized">Welcome to The
+                            Flightly API</h1>
+                        <a class="button subtitle is-primary " href="{% url 'api-docs:docs-index' %}">
+                            Go to Docs >
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-foot ">
+            <footer class="footer black-bg">
+                <div class="content has-text-centered">
+                    <p>
+                        Created by <strong><a href="https://github.com/parseendavid">David Parseen</a></strong>.
+                        The source code is licensed under
+                        <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0</a>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </section>
+
+</body>
+
+</html>
