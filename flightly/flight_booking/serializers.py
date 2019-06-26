@@ -5,8 +5,8 @@ from flightly.flight_booking.models import Flight, Reservation
 
 class FlightSerializer(serializers.HyperlinkedModelSerializer):
 
-    number_of_reservations = serializers.ReadOnlyField(source='get_number_of_reservations')
-
+    number_of_reservations = serializers.ReadOnlyField(
+        source='get_number_of_reservations')
 
     class Meta:
         model = Flight

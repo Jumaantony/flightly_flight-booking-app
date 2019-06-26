@@ -41,7 +41,7 @@ class Flight(models.Model):
     @property
     def available_seats(self):
         return self.capacity - self.reservation_set.count()
-    
+
     def get_number_of_reservations(self):
         '''
         returns the number of people that have made reservations for
@@ -53,8 +53,9 @@ class Flight(models.Model):
         #       cursor.execute(f"SELECT COUNT(*) from {Reservation._meta.db_table} WHERE flight_id='{self.id}';")
         #       no_of_reservations = cursor.fetchall()[0][0]
         #  return no_of_reservations
-        #  
-        #  But the following statement does the same and is provided natively by Django
+        #
+        # But the following statement does the same and is provided natively by
+        # Django
         return self.reservation_set.count()
 
     def __str__(self):

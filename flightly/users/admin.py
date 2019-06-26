@@ -24,4 +24,3 @@ class FlightlyUserAdmin(UserAdmin):
     )
     ordering = ('first_name',)
     search_fields = ('first_name', 'last_name', 'email')
-
