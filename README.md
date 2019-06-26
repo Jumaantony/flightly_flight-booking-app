@@ -58,6 +58,10 @@ or
 python manage.py runserver
 ```
 
+## Using The Docs
+
+To access the API's Documentation Web Interface run the server and navigate to `/`.
+
 ## Creating SuperUser and Using the Admin Dashboard
 
 To create a superuser use the below command and fill in the relevant prompts:
