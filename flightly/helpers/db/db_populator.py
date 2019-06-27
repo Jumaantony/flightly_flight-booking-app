@@ -45,7 +45,7 @@ for _ in tqdm(range(500)):
     except IntegrityError:
         continue
 
-print(f"FlightlyUsers populates Successfully.")
+print(f"FlightlyUsers populated Successfully.")
 
 # In[82]:
 
@@ -80,7 +80,7 @@ for _ in tqdm(range(40)):
     except IntegrityError:
         # A cheap way to escape IntegrityErrors due to similar names of Flights
         continue
-print(f"Flights populates Successfully.")
+print(f"Flights populated Successfully.")
 
 
 # In[80]:
@@ -97,5 +97,5 @@ for _ in tqdm(range(int(FlightlyUser.objects.all().count()
     _reservation = Reservation(traveler=traveler, flight=flight, status=status)
     _reservation.save()
 
-print(f"Reservations populates Successfully.")
+print(f"Reservations populated Successfully.")
 # In[ ]:

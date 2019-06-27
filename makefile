@@ -12,7 +12,7 @@ set_env_vars:
 
 initdb:
 	$(MAKE) migrate
-	python helpers/db/db_populator.py
+	python flightly/helpers/db/db_populator.py
 
 serve:
 	$(MAKE) set_env_vars
