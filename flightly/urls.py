@@ -13,8 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from flightly.helpers.scheduler.jobs import scheduler
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+
 
 admin.site.site_header = "Flightly Admin"
 admin.site.site_title = "Flightly Admin Portal"
@@ -26,3 +29,8 @@ urlpatterns = [
     path('', include('flightly.flight_booking.urls')),
     path('', include('flightly.docs.urls')),
 ]
+
+
+# Starting Background Scheduler
+if settings.SCHEDULER_AUTOSTART:
+    scheduler.start()
