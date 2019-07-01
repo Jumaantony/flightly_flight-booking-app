@@ -1,3 +1,4 @@
+import os
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
@@ -58,11 +59,11 @@ class FlightlyUser(AbstractUser):
     email = models.EmailField(_('email address'), unique=True, error_messages={
         'unique': _("A user with that email address already exists."),
     },)
-    photograph = models.ImageField(_("Passport Photograph"),
-                                           default="img/default_user_photo.png",
+    photograph = encrypt(models.ImageField(_("Passport Photograph"),
+                                           default=f"img/{os.getenv('DEFAULT_CLOUDINARY_IMG_NAME')}",
                                            upload_to=user_directory_path
-                                           )
-                                           
+                                           ))
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name']

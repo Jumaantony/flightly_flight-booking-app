@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_apscheduler',
     'django_filters',
+    'cloudinary_storage',
+    'cloudinary',
     # Local Applications
     'flightly.flight_booking',
     'flightly.users',
@@ -176,5 +178,12 @@ CRYPTOGRAPHY_SALT = os.getenv('CRYPTOGRAPHY_SALT', None)
 CRYPTOGRAPHY_KEY = os.getenv('CRYPTOGRAPHY_KEY', None)
 
 # Media Settings
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# Cloudinary Creds
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET')
+}
