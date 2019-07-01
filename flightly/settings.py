@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Installed Applications
     'rest_framework',
     'django_apscheduler',
+    'django_filters',
     # Local Applications
     'flightly.flight_booking',
     'flightly.users',
@@ -138,12 +139,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 AUTH_USER_MODEL = "users.FlightlyUser"
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 30
+    'PAGE_SIZE': 30,
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+
 }
 
 # This scheduler config will:
@@ -165,3 +170,11 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+# Cyptography Settings
+CRYPTOGRAPHY_SALT = os.getenv('CRYPTOGRAPHY_SALT', None)
+CRYPTOGRAPHY_KEY = os.getenv('CRYPTOGRAPHY_KEY', None)
+
+# Media Settings
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
