@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import MinValueValidator
 
 from flightly.users.models import FlightlyUser
 
@@ -31,10 +32,11 @@ class Flight(models.Model):
     arrival_airport = models.CharField(
         _("Arrival Airport"), max_length=50, null=False)
     departure_datetime = models.DateTimeField(_("Departure Time"))
-    capacity = models.IntegerField(_("Carrying Capacity"), null=False)
+    capacity = models.PositiveIntegerField(_("Carrying Capacity"), null=False)
     price = models.FloatField(
         _("Ticket Price"),
-        default=0.00)
+        default=0.00,
+        validators=[MinValueValidator(0)])
 
     @property
     def available_seats(self):
