@@ -2,7 +2,15 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
+from django.utils.safestring import mark_safe
 
+from django_cryptography.fields import encrypt
+
+
+def user_directory_path(instance, filename):
+        # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+        ext = filename.split('.')[-1]
+        return f'img/{uuid.uuid4()}.{ext}'
 
 class FlightlyUserManager(BaseUserManager):
     use_in_migrations = True
@@ -50,6 +58,11 @@ class FlightlyUser(AbstractUser):
     email = models.EmailField(_('email address'), unique=True, error_messages={
         'unique': _("A user with that email address already exists."),
     },)
+    photograph = models.ImageField(_("Passport Photograph"),
+                                           default="img/default_user_photo.png",
+                                           upload_to=user_directory_path
+                                           )
+                                           
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name']

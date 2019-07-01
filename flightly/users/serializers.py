@@ -19,6 +19,7 @@ class FlightlyUserSerializer(serializers.HyperlinkedModelSerializer):
             'last_name',
             'password',
             'last_login',
+            'photograph'
         )
         extra_kwargs = {
             'password': {
