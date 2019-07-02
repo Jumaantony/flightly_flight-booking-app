@@ -25,8 +25,9 @@ admin.site.index_title = "Welcome to Flightly Admin Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('flightly.users.urls')),
-    path('', include('flightly.flight_booking.urls')),
+    path('auth/', include('rest_framework.urls')),
+    path('api/v1/', include('flightly.users.urls')),
+    path('api/v1/', include('flightly.flight_booking.urls')),
     path('', include('flightly.docs.urls')),
 ]
 
