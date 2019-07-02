@@ -8,7 +8,7 @@ description = "Flight Booking API"
 
 urlpatterns = [
     path('docs/', include_docs_urls(title=title,
-                                    description=description
+                                    description=description,
                                     )),
     path('api/v1/', get_schema_view(title=title,
                                     description=description

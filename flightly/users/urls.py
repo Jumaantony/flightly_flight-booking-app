@@ -1,16 +1,20 @@
 from django.urls import path
 
 from flightly.users.views import (
-    FlightlyUserApiView, FlightlyUserDetailApiView
+    FlightlyUserApiView, FlightlyUserDetailApiView, FlightlyUserCreateApiView
 )
 
 urlpatterns = [
     path(
-        'api/v1/users/',
+        'users/all',
         FlightlyUserApiView.as_view(),
         name='flightlyusers-all'),
     path(
-        'api/v1/user/<uuid:pk>',
+        'users/',
+        FlightlyUserCreateApiView.as_view(),
+        name='flightlyusers-create'),
+    path(
+        'user/<uuid:pk>',
         FlightlyUserDetailApiView.as_view(),
         name='flightlyuser-detail'),
 ]

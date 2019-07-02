@@ -26,7 +26,7 @@ class FlightlyUserSerializer(serializers.HyperlinkedModelSerializer):
                 'write_only': True
             }
         }
-        read_only_fields = ('last_login',)
+        read_only_fields = ('last_login','email')
 
     def validate_password(self, value):
         password_validation.validate_password(value, self.instance)

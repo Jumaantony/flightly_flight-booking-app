@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Installed Applications
     'rest_framework',
+    'rest_framework.authtoken',
     'django_apscheduler',
     'django_filters',
     'cloudinary_storage',
@@ -147,13 +148,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-
+# Authentication Settings
 AUTH_USER_MODEL = "users.FlightlyUser"
+LOGIN_URL = '/auth/login/'
+LOGIN_REDIRECT_URL = '/docs/'
+LOGOUT_REDIRECT_URL = LOGIN_URL
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 30,
-    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 
 }
 
