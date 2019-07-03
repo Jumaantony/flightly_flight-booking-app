@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from flightly.users.views import (
     FlightlyUserApiView, FlightlyUserDetailApiView, FlightlyUserCreateApiView
@@ -17,4 +17,5 @@ urlpatterns = [
         'user/<uuid:pk>',
         FlightlyUserDetailApiView.as_view(),
         name='flightlyuser-detail'),
+    path('auth/jwt/', include('flightly.users.jwt_auth.urls')),
 ]
