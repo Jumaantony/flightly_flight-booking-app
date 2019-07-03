@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from datetime import timedelta
 
 import dj_database_url
 
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Installed Applications
     'rest_framework',
+    'rest_framework_jwt',
     'rest_framework.authtoken',
     'django_apscheduler',
     'django_filters',
@@ -158,7 +160,11 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 30,
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
-
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
 }
 
 # This scheduler config will:
@@ -199,3 +205,11 @@ CLOUDINARY_STORAGE = {
 # djang-heroku setting
 import django_heroku
 django_heroku.settings(locals())
+
+# JWT settings
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': timedelta(hours=5),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(hours=5),
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer'
+}
