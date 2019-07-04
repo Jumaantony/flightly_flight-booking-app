@@ -5,6 +5,8 @@ import sys
 
 
 def main():
+    if 'runserver' in sys.argv:
+        os.environ.setdefault('SCHEDULER_AUTOSTART', 'True')
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'flightly.settings')
     try:
         from django.core.management import execute_from_command_line
