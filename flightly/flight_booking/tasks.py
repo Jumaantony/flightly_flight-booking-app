@@ -1,5 +1,6 @@
 from flightly.flight_booking.models import Flight
 from datetime import datetime, timedelta
+from time import sleep
 from django.conf import settings
 from pytz import timezone
 from numpy import array_split
@@ -18,6 +19,7 @@ class SendEmailReminder:
         # time)
 
         for index, chunk in enumerate(self.chunked_flight_list()):
+            print(f'Starting Thread #{index + 1 }')
             mailing_thread = Thread(
                 name=f"Mailing Thread #{index + 1}",
                 target=self.run_mailing_thread,
@@ -68,3 +70,4 @@ class SendEmailReminder:
             subject=subject,
             message=message,
         )
+        sleep(1)
