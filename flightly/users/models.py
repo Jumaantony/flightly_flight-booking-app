@@ -9,9 +9,10 @@ from django_cryptography.fields import encrypt
 
 
 def user_directory_path(instance, filename):
-        # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-        ext = filename.split('.')[-1]
-        return f'img/{uuid.uuid4()}.{ext}'
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    ext = filename.split('.')[-1]
+    return f'img/{uuid.uuid4()}.{ext}'
+
 
 class FlightlyUserManager(BaseUserManager):
     use_in_migrations = True
@@ -63,7 +64,6 @@ class FlightlyUser(AbstractUser):
                                            default=f"img/{os.getenv('DEFAULT_CLOUDINARY_IMG_NAME')}",
                                            upload_to=user_directory_path
                                            ))
-
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name']

@@ -3,10 +3,12 @@ from rest_framework.test import APIClient
 from django.contrib.auth import get_user_model
 from rest_framework_jwt.settings import api_settings
 
+
 class SetupWithNoUser(APITestCase):
     def setUp(self):
         self.client = APIClient()
         self.base_url = '/api/v1/'
+
 
 class SetupWithNonAdminUser(SetupWithNoUser):
     def setUp(self):
@@ -25,6 +27,7 @@ class SetupWithNonAdminUser(SetupWithNoUser):
             email='nonadmin@test.com',
             password='random_test_password'
         )
+
 
 class SetupWithAdminUser(SetupWithNoUser):
     def setUp(self):
