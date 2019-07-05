@@ -7,7 +7,7 @@ from flightly.flight_booking.serializers import FlightSerializer, ReservationSer
 from flightly.flight_booking.permissions import (
     IsReservationOwnerOrAdminOnly, IsAuthenticated,
     IsAdminUserOrReadOnly
-    )
+)
 
 
 class FlightsApiView(generics.ListCreateAPIView):
@@ -32,12 +32,11 @@ class ReservationListView(generics.ListCreateAPIView):
             queryset = Reservation.objects.all()
         else:
             queryset = Reservation.objects.filter(
-            traveler = user
+                traveler=user
             )
         if isinstance(queryset, QuerySet):
             queryset = queryset.all()
         return queryset
-
 
 
 class ReservationDetailApiView(generics.RetrieveUpdateDestroyAPIView):

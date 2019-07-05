@@ -1,6 +1,7 @@
 from rest_framework.permissions import (
-        BasePermission, IsAuthenticated,
-        IsAdminUser, SAFE_METHODS)
+    BasePermission, IsAuthenticated,
+    IsAdminUser, SAFE_METHODS)
+
 
 class IsTravelerOrAdminOnly(BasePermission):
 
@@ -8,10 +9,12 @@ class IsTravelerOrAdminOnly(BasePermission):
         user = request.user
         return obj.traveler == user or user.is_admin or user.is_superuser
 
+
 class IsReservationOwnerOrAdminOnly(BasePermission):
     def has_object_permission(self, request, view, obj):
         user = request.user
         return obj.traveler == user or user.is_staff or user.is_superuser
+
 
 class IsAdminUserOrReadOnly(IsAdminUser):
 

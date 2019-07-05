@@ -14,11 +14,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='flight',
             name='capacity',
-            field=models.PositiveIntegerField(verbose_name='Carrying Capacity'),
+            field=models.PositiveIntegerField(
+                verbose_name='Carrying Capacity'),
         ),
         migrations.AlterField(
             model_name='flight',
             name='price',
-            field=models.FloatField(default=0.0, validators=[django.core.validators.MinValueValidator(0)], verbose_name='Ticket Price'),
+            field=models.FloatField(default=0.0, validators=[
+                                    django.core.validators.MinValueValidator(0)], verbose_name='Ticket Price'),
         ),
     ]

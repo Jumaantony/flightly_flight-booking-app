@@ -14,6 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='flightlyuser',
             name='photograph',
-            field=django_cryptography.fields.encrypt(models.ImageField(default='img/default_user_photo.png', upload_to='img', verbose_name='Passport Photograph')),
+            field=django_cryptography.fields.encrypt(models.ImageField(
+                default='img/default_user_photo.png', upload_to='img', verbose_name='Passport Photograph')),
         ),
     ]
