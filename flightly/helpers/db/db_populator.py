@@ -46,6 +46,7 @@ def populateUsers(number=500):
             continue
 
     print(f"FlightlyUsers populated Successfully.")
+    return FlightlyUser.objects.all()
 
 # In[82]:
 
@@ -86,6 +87,7 @@ def populateFlights(number=40):
             # Flights
             continue
     print(f"Flights populated Successfully.")
+    return Flight.objects.all()
 
 
 # In[80]:
@@ -104,6 +106,7 @@ def populateReservations():
         _reservation.save()
 
     print(f"Reservations populated Successfully.")
+    return Reservation.objects.all()
 # In[ ]:
 
 
