@@ -32,7 +32,8 @@ fake = Faker()
 # In[78]:
 
 def populateUsers(number=500):
-    for _ in tqdm(range(number)):
+    goal = 0
+    while goal < number:
         try:
             fname = fake.first_name()
             lname = fake.last_name()
@@ -55,7 +56,8 @@ def populateFlights(number=40):
     random.shuffle(air_lines)
     arv_airline_in_cycle = itertools.cycle(air_lines[len(air_lines) // 2:])
     timezone = pytz.utc
-    for _ in tqdm(range(number)):
+    goal = 0
+    while goal < number:
         try:
             dep_air_line = next(dep_airline_in_cycle)
             arv_air_line = next(arv_airline_in_cycle)
@@ -78,6 +80,7 @@ def populateFlights(number=40):
             )
             if _flight.departure_airport != _flight.arrival_airport:
                 _flight.save()
+                goal += 1
         except IntegrityError:
             # A cheap way to escape IntegrityErrors due to similar names of
             # Flights
