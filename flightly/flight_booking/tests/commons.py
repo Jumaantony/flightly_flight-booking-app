@@ -1,11 +1,12 @@
 from rest_framework.test import APITestCase
-from rest_framework.test import APIRequestFactory
+from rest_framework.test import APIClient
 from django.contrib.auth import get_user_model
 from rest_framework_jwt.settings import api_settings
 
 class SetupWithNoUser(APITestCase):
     def setUp(self):
-        self.factory = APIRequestFactory()
+        self.client = APIClient()
+        self.base_url = '/api/v1/'
 
 class SetupWithNonAdminUser(SetupWithNoUser):
     def setUp(self):
@@ -14,7 +15,7 @@ class SetupWithNonAdminUser(SetupWithNoUser):
         self.jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
         self.payload = self.jwt_payload_handler(self.user)
         self.token = self.jwt_encode_handler(self.payload)
-        super(SetupWithNonAdminUser).setUp()
+        super().setUp()
 
     @staticmethod
     def setup_user():
@@ -32,7 +33,7 @@ class SetupWithAdminUser(SetupWithNoUser):
         self.user = self.setup_user()
         self.payload = self.jwt_payload_handler(self.user)
         self.token = self.jwt_encode_handler(self.payload)
-        super(SetupWithAdminUser).setUp()
+        super().setUp()
 
     @staticmethod
     def setup_user():
