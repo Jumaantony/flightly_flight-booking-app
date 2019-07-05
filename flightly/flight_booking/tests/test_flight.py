@@ -24,3 +24,19 @@ class TestWithAnonUser(SetupFlights):
                          f'Expected Response Code 200, received {response.status_code} instead.')
         self.assertEqual(response.data['count'], self.inserted_num,
                          f"Expected {self.inserted_num} Flights, received {response.data['count']} instead.")
+
+    def test_user_cannot_create_flights(self):
+        data = {
+            "name": "Gremlin Airlines Inc. 25",
+            "departure_airport": "Hotel Transylvania",
+            "arrival_airport": "Bermuda Triangle",
+            "departure_datetime": "2019-09-08 00:00:00+00",
+            "capacity": 666,
+            "price": 0
+        }
+        response = self.client.post(
+            self.list_uri,
+            data=data,
+            content_type='application/json')
+        self.assertEqual(response.status_code, 401,
+                         f'Expected Response Code 401, received {response.status_code} instead.')
