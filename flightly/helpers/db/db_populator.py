@@ -18,7 +18,7 @@ django.setup()
 
 from flightly.flight_booking.models import Flight, Reservation
 from flightly.users.models import FlightlyUser
-import airlines
+from flightly.helpers.db import airlines
 
 
 # In[76]:
@@ -49,7 +49,7 @@ def populateUsers(number=500):
 
 # In[82]:
 
-def populateFlights(number=40)
+def populateFlights(number=40):
     air_lines = airlines.get_reports(test=False)
     dep_airline_in_cycle = itertools.cycle(air_lines[:len(air_lines)//2])
     random.shuffle(air_lines)
