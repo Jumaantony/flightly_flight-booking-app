@@ -1,5 +1,9 @@
 # Flightly ✈️
 
+[![CircleCI](https://circleci.com/gh/parseendavid/flightly_flight-booking-app/tree/develop.svg?style=svg)](https://circleci.com/gh/parseendavid/flightly_flight-booking-app/tree/develop)
+[![Coverage Status](https://coveralls.io/repos/github/parseendavid/flightly_flight-booking-app/badge.svg?branch=develop)](https://coveralls.io/github/parseendavid/flightly_flight-booking-app?branch=develop)
+
+
 Flightly is a flight booking app that aims at easing the process of booking flight by automation.
 
 ## Prerequisite
@@ -26,7 +30,7 @@ Then setup appropriate environment variables as prescribed in the `.env.sample` 
 
 ## Database Initialization
 
-N/B: You have to create a postgresql database and added it to the `.env` file or runtime envirionment using 
+N/B: You have to create a postgresql database and added it to the `.env` file or runtime envirionment using
 
 ```bash
 export DATABASE_URI="postgres:///<database-name>"
