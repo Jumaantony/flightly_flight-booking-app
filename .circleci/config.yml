@@ -1,0 +1,49 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/circleci-demo-python-django
+    docker:
+      - image: circleci/python:3.7.3
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+          DATABASE_URI: postgresql://root@localhost/circle_test
+      - image: nimbustech/postgres-ssl:9.5
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circle_test
+    steps:
+      - checkout
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
+      - restore_cache:
+          key: deps10-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - run:
+          command: |
+            sudo pip install pipenv
+            pipenv install
+      - save_cache:
+          key: deps10-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - '.venv'
+            - '/usr/local/bin'
+            - '/usr/local/lib/python3.7/site-packages'
+      - run:
+          name: run tests
+          command: |
+            pipenv run coverage run --source='flightly'  manage.py test
+      - run:
+          name: save coverage
+          command: pipenv run coverage xml -o ./tmp/coverage.xml
+      - run:
+          name: run coveralls
+          command: |
+            pipenv run coveralls
+      - persist_to_workspace:
+          root: tmp
+          paths:
+              - coverage.xml
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+          destination: tr1
