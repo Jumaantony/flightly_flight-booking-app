@@ -1,7 +1,8 @@
 from rest_framework import generics
+from rest_framework.exceptions import PermissionDenied
 from django.db.models.query import QuerySet
 
-
+from flightly.users.serializers import FlightlyUserSerializer
 from flightly.flight_booking.models import Flight, Reservation
 from flightly.flight_booking.serializers import FlightSerializer, ReservationSerializer
 from flightly.flight_booking.permissions import (
@@ -38,8 +39,18 @@ class ReservationListView(generics.ListCreateAPIView):
             queryset = queryset.all()
         return queryset
 
+    def perform_create(self, serializer):
+        # import pdb; pdb.set_trace()
+        user = serializer.context['request'].user
+        if user.is_staff or user.is_superuser or serializer.validated_data['traveler'] == user:
+            serializer.save()
+        else:
+            raise PermissionDenied(
+                detail='You are not authorized to make reservations for other users'
+            )
+
 
 class ReservationDetailApiView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsReservationOwnerOrAdminOnly,)
+    permission_classes = (IsReservationOwnerOrAdminOnly, IsAuthenticated)
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
