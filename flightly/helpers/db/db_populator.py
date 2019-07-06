@@ -13,7 +13,6 @@ import random
 from faker import Faker
 import itertools
 import django
-from tqdm import tqdm
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "flightly.settings")
 django.setup()
 
@@ -101,8 +100,8 @@ def populateReservations(do_print=False):
     travelers = itertools.cycle(FlightlyUser.objects.all())
     flights = itertools.cycle(Flight.objects.all())
     status_options = ['paid', 'unpaid', 'cancelled']
-    for _ in tqdm(range(int(FlightlyUser.objects.all().count()
-                            * Flight.objects.all().count() / 3.14))):
+    for _ in range(int(FlightlyUser.objects.all().count()
+                            * Flight.objects.all().count() / 3.14)):
         with transaction.atomic():
             traveler = next(travelers)
             flight = next(flights)
