@@ -18,4 +18,7 @@ serve:
 	$(MAKE) set_env_vars
 	./manage.py runserver
 
+test:
+	coverage run --source='.' manage.py test && coverage report
+
 .PHONY: set_env_vars
