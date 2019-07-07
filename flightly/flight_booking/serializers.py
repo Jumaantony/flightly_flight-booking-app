@@ -25,14 +25,21 @@ class FlightSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ReservationSerializer(serializers.HyperlinkedModelSerializer):
-
+    flight_name = serializers.StringRelatedField(source='flight')
+    flight_departure_time = serializers.StringRelatedField(source='flight.departure_datetime')
+    flight_departure_airport = serializers.StringRelatedField(source='flight.departure_airport')
+    traveler_email = serializers.StringRelatedField(source='traveler')
     class Meta:
         model = Reservation
         fields = (
             'url',
             'id',
             'traveler',
+            'traveler_email',
             'flight',
+            'flight_name',
+            'flight_departure_airport',
+            'flight_departure_time',
             'ticket_number',
             'status',
         )

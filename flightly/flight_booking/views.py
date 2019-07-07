@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, filters
 from rest_framework.exceptions import PermissionDenied
 from django.db.models.query import QuerySet
 
@@ -15,6 +15,9 @@ class FlightsApiView(generics.ListCreateAPIView):
     permission_classes = (IsAdminUserOrReadOnly,)
     queryset = Flight.objects.all()
     serializer_class = FlightSerializer
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ('name', 'departure_airport', 'arrival_airport')
+    ordering_fields = ('name', 'price', 'capacity', 'departure_datetime')
 
 
 class FlightDetailApiView(generics.RetrieveUpdateDestroyAPIView):
@@ -26,6 +29,9 @@ class FlightDetailApiView(generics.RetrieveUpdateDestroyAPIView):
 class ReservationListView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = ReservationSerializer
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ('flight_id__name', 'flight_id__departure_airport','traveler_id__email')
+    ordering_fields = ('flight_id__departure_datetime','status')
 
     def get_queryset(self):
         user = self.request.user
