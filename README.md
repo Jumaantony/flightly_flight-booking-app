@@ -83,7 +83,7 @@ To access the Admin Dashboard navigate to `/admin` url on the server ran above a
 ## Base Endpoints
 | Endpoint                  | Function                                      | HTTP METHOD      | Required Params (Optional Params)  | Required Permissions                                  |
 | ------------------------- |:---------------------------------------------:| ----------------:| ----------------------------------:| -----------------------------------------------------:|
-| /docs                     | Documentation for all the API's functionality | GET              | None                               | None                                                  |
+| /docs/                    | Documentation for all the API's functionality | GET              | None                               | None                                                  |
 | /api/v1/                  | Schema for V1 endpoints                       | GET              | None                               | None                                                  |
 | /api/v1/auth/jwt/obtain/  | JWT login                                     | POST             | email, password                     | None                                                  |
 | /api/v1/auth/jwt/refresh/ | JWT refreshing                                | POST             | token                              | None                                                  |
