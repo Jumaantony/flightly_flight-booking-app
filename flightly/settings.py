@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import django_heroku
 import os
 from datetime import timedelta
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 import dj_database_url
 
@@ -213,3 +215,9 @@ JWT_AUTH = {
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(hours=5),
     'JWT_AUTH_HEADER_PREFIX': 'Bearer'
 }
+
+# Sentry Config
+sentry_sdk.init(
+    dsn=os.getenv('SENTRY_DSN', ""),
+    integrations=[DjangoIntegration()]
+)
