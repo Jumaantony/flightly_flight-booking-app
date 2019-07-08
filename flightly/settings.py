@@ -65,7 +65,6 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
 
@@ -221,3 +220,6 @@ sentry_sdk.init(
     dsn=os.getenv('SENTRY_DSN', ""),
     integrations=[DjangoIntegration()]
 )
+#  Security Enhancement
+CSRF_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
