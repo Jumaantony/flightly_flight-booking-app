@@ -2,8 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/parseendavid/flightly_flight-booking-app/tree/develop.svg?style=svg)](https://circleci.com/gh/parseendavid/flightly_flight-booking-app/tree/develop)
 [![Coverage Status](https://coveralls.io/repos/github/parseendavid/flightly_flight-booking-app/badge.svg?branch=develop)](https://coveralls.io/github/parseendavid/flightly_flight-booking-app?branch=develop)
-
-[![Staging Deployment](https://www.yegor256.com/images/2014/09/heroku-logo.svg)](http://api-flightly.herokuapp.com/)
+[<img src="https://www.yegor256.com/images/2014/09/heroku-logo.svg" width="30">](http://api-flightly.herokuapp.com/)
 
 Flightly is a flight booking app that aims at easing the process of booking flight by automation.
 
